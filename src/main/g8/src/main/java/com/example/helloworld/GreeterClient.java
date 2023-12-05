@@ -1,20 +1,20 @@
 package com.example.helloworld;
 
 //#import
-import akka.Done;
-import akka.NotUsed;
-import akka.japi.Pair;
-import akka.actor.typed.ActorSystem;
-import akka.actor.typed.javadsl.Behaviors;
-import akka.grpc.GrpcClientSettings;
-import akka.stream.javadsl.Source;
+import org.apache.pekko.Done;
+import org.apache.pekko.NotUsed;
+import org.apache.pekko.japi.Pair;
+import org.apache.pekko.actor.typed.ActorSystem;
+import org.apache.pekko.actor.typed.javadsl.Behaviors;
+import org.apache.pekko.grpc.GrpcClientSettings;
+import org.apache.pekko.stream.javadsl.Source;
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 
-import static akka.NotUsed.notUsed;
+import static org.apache.pekko.NotUsed.notUsed;
 //#import
 
 //#client-request-reply

@@ -2,14 +2,14 @@ package com.example.helloworld;
 
 //#import
 
-import akka.NotUsed;
-import akka.japi.Pair;
-import akka.actor.typed.ActorSystem;
-import akka.stream.javadsl.BroadcastHub;
-import akka.stream.javadsl.Keep;
-import akka.stream.javadsl.MergeHub;
-import akka.stream.javadsl.Sink;
-import akka.stream.javadsl.Source;
+import org.apache.pekko.NotUsed;
+import org.apache.pekko.japi.Pair;
+import org.apache.pekko.actor.typed.ActorSystem;
+import org.apache.pekko.stream.javadsl.BroadcastHub;
+import org.apache.pekko.stream.javadsl.Keep;
+import org.apache.pekko.stream.javadsl.MergeHub;
+import org.apache.pekko.stream.javadsl.Sink;
+import org.apache.pekko.stream.javadsl.Source;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;

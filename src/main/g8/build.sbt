@@ -2,12 +2,12 @@ name := "$name$"
 version := "1.0"
 scalaVersion := "$scala_version$"
 
-val akkaVersion = "$akka_version$"
-lazy val akkaGrpcVersion = "$akka_grpc_version$"
+val pekkoVersion = "$pekko_version$"
+lazy val pekkoGrpcVersion = "$pekko_grpc_version$"
 
-enablePlugins(AkkaGrpcPlugin)
+enablePlugins(PekkoGrpcPlugin)
 
-akkaGrpcGeneratedLanguages := Seq(AkkaGrpc.Java)
+pekkoGrpcGeneratedLanguages := Seq(PekkoGrpc.Java)
 
 // Run in a separate JVM, to make sure sbt waits until all threads have
 // finished before returning.
@@ -15,18 +15,16 @@ akkaGrpcGeneratedLanguages := Seq(AkkaGrpc.Java)
 // sbt tasks, consider https://github.com/spray/sbt-revolver/
 fork := true
 
-resolvers += "Akka library repository".at("https://repo.akka.io/maven")
-
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
-  "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
-  "com.typesafe.akka" %% "akka-stream" % akkaVersion,
-  "com.typesafe.akka" %% "akka-pki" % akkaVersion,
+  "org.apache.pekko" %% "pekko-actor-typed" % pekkoVersion,
+  "org.apache.pekko" %% "pekko-discovery" % pekkoVersion,
+  "org.apache.pekko" %% "pekko-stream" % pekkoVersion,
+  "org.apache.pekko" %% "pekko-pki" % pekkoVersion,
 
-  "ch.qos.logback" % "logback-classic" % "1.2.11",
+  "ch.qos.logback" % "logback-classic" % "1.2.13",
 
-  "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion % Test,
-  "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % Test,
+  "org.apache.pekko" %% "pekko-actor-testkit-typed" % pekkoVersion % Test,
+  "org.apache.pekko" %% "pekko-stream-testkit" % pekkoVersion % Test,
   "junit" % "junit" % "4.13.2" % Test,
   "com.novocode" % "junit-interface" % "0.11" % Test
 )

@@ -1,9 +1,9 @@
 // #full-example
 package com.example.helloworld;
 
-import akka.actor.testkit.typed.javadsl.ActorTestKit;
-import akka.actor.testkit.typed.javadsl.TestKitJunitResource;
-import akka.actor.typed.ActorSystem;
+import org.apache.pekko.actor.testkit.typed.javadsl.ActorTestKit;
+import org.apache.pekko.actor.testkit.typed.javadsl.TestKitJunitResource;
+import org.apache.pekko.actor.typed.ActorSystem;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

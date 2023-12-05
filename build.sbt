@@ -1,10 +1,12 @@
+import org.apache.pekko.PekkoParadoxPlugin.autoImport._
+
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
 // See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details.
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "akka-grpc-java-seed",
+    name := "pekko-grpc-java-seed",
     Test / test := {
       val _ = (Test / g8Test).toTask("").value
     },
@@ -19,4 +21,5 @@ lazy val root = project
 //    open docs/target/paradox/site/main/index.html
 lazy val docs = project
   .in(file("docs"))
-  .enablePlugins(ParadoxPlugin)
+  .enablePlugins(ParadoxPlugin, PekkoParadoxPlugin)
+  .settings(pekkoParadoxGithub := Some("https://github.com/apache/incubator-pekko-grpc-quickstart-java.g8"))

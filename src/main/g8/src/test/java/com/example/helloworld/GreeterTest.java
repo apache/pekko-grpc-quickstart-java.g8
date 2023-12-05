@@ -1,12 +1,12 @@
 // #full-example
 package com.example.helloworld;
 
-import akka.actor.testkit.typed.javadsl.ActorTestKit;
-import akka.actor.testkit.typed.javadsl.TestKitJunitResource;
-import akka.actor.typed.ActorSystem;
-import akka.actor.typed.javadsl.Behaviors;
-import akka.grpc.GrpcClientSettings;
-import akka.http.javadsl.ServerBinding;
+import org.apache.pekko.actor.testkit.typed.javadsl.ActorTestKit;
+import org.apache.pekko.actor.testkit.typed.javadsl.TestKitJunitResource;
+import org.apache.pekko.actor.typed.ActorSystem;
+import org.apache.pekko.actor.typed.javadsl.Behaviors;
+import org.apache.pekko.grpc.GrpcClientSettings;
+import org.apache.pekko.http.javadsl.ServerBinding;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -25,7 +25,7 @@ public class GreeterTest {
 
   // important to enable HTTP/2 in server ActorSystem's config
   private static final Config config = ConfigFactory
-          .parseString("akka.http.server.preview.enable-http2 = on")
+          .parseString("pekko.http.server.preview.enable-http2 = on")
           .withFallback(ConfigFactory.defaultApplication());
 
   @ClassRule

@@ -2,12 +2,12 @@ package com.example.helloworld;
 
 //#import
 
-import akka.actor.typed.ActorSystem;
-import akka.actor.typed.javadsl.Behaviors;
-import akka.http.javadsl.*;
-import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.HttpResponse;
-import akka.japi.function.Function;
+import org.apache.pekko.actor.typed.ActorSystem;
+import org.apache.pekko.actor.typed.javadsl.Behaviors;
+import org.apache.pekko.http.javadsl.*;
+import org.apache.pekko.http.javadsl.model.HttpRequest;
+import org.apache.pekko.http.javadsl.model.HttpResponse;
+import org.apache.pekko.japi.function.Function;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
@@ -33,7 +33,7 @@ public class GreeterServer {
 
   public static void main(String[] args) throws Exception {
     // important to enable HTTP/2 in ActorSystem's config
-    Config conf = ConfigFactory.parseString("akka.http.server.preview.enable-http2 = on")
+    Config conf = ConfigFactory.parseString("pekko.http.server.preview.enable-http2 = on")
       .withFallback(ConfigFactory.load());
     ActorSystem<Void> system = ActorSystem.create(Behaviors.empty(), "GreeterServer", conf);
     new GreeterServer(system).run();
@@ -67,7 +67,7 @@ public class GreeterServer {
   // #server
 
 
-  // FIXME this will be replaced by a more convenient utility, see https://github.com/akka/akka-grpc/issues/89
+  // FIXME this will be replaced by a more convenient utility, see https://github.com/apache/incubator-pekko-grpc/issues/89
   private static HttpsConnectionContext serverHttpContext() throws Exception {
     String keyEncoded = read(GreeterServer.class.getResourceAsStream("/certs/server1.key"))
         .replace("-----BEGIN PRIVATE KEY-----\n", "")
