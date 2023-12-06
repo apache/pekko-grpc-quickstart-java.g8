@@ -1,4 +1,4 @@
 
 addSbtPlugin(
-  "org.apache.pekko" % "sbt-pekko-grpc" % "$pekko_grpc_version$"
+  "org.apache.pekko" % "pekko-grpc-sbt-plugin" % "$pekko_grpc_version$"
 )
