@@ -67,7 +67,7 @@ public class GreeterServer {
   // #server
 
 
-  // FIXME this will be replaced by a more convenient utility, see https://github.com/apache/incubator-pekko-grpc/issues/89
+  // FIXME this will be replaced by a more convenient utility, see https://github.com/apache/pekko-grpc/issues/89
   private static HttpsConnectionContext serverHttpContext() throws Exception {
     String keyEncoded = read(GreeterServer.class.getResourceAsStream("/certs/server1.key"))
         .replace("-----BEGIN PRIVATE KEY-----\n", "")
