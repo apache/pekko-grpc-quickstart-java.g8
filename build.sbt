@@ -22,4 +22,4 @@ lazy val root = project
 lazy val docs = project
   .in(file("docs"))
   .enablePlugins(ParadoxPlugin, PekkoParadoxPlugin)
-  .settings(pekkoParadoxGithub := Some("https://github.com/apache/incubator-pekko-grpc-quickstart-java.g8"))
+  .settings(pekkoParadoxGithub := Some("https://github.com/apache/pekko-grpc-quickstart-java.g8"))
