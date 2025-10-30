@@ -21,12 +21,12 @@ libraryDependencies ++= Seq(
   "org.apache.pekko" %% "pekko-stream" % pekkoVersion,
   "org.apache.pekko" %% "pekko-pki" % pekkoVersion,
 
-  "ch.qos.logback" % "logback-classic" % "1.3.14",
+  "ch.qos.logback" % "logback-classic" % "1.3.15",
 
   "org.apache.pekko" %% "pekko-actor-testkit-typed" % pekkoVersion % Test,
   "org.apache.pekko" %% "pekko-stream-testkit" % pekkoVersion % Test,
   "junit" % "junit" % "4.13.2" % Test,
-  "com.novocode" % "junit-interface" % "0.11" % Test
+  "com.github.sbt" % "junit-interface" % "0.13.3" % Test
 )
 
 testOptions += Tests.Argument(TestFrameworks.JUnit, "-v")
