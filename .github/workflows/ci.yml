@@ -18,11 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Setup Java 11
+      - name: Setup Java 17
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 11
+          java-version: 17
 
       - name: Install sbt
         uses: sbt/setup-sbt@bfea3c5f48abd221b04a6df4798aa5eb8b6a2baf # v1.5.6
