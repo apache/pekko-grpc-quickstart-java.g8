@@ -1,6 +1,6 @@
 package com.example.helloworld;
 
-//#import
+// #import
 
 import org.apache.pekko.actor.typed.ActorSystem;
 import org.apache.pekko.actor.typed.javadsl.Behaviors;
@@ -26,15 +26,16 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.concurrent.CompletionStage;
 
-//#import
+// #import
 
-//#server
+// #server
 public class GreeterServer {
 
   public static void main(String[] args) throws Exception {
     // important to enable HTTP/2 in ActorSystem's config
-    Config conf = ConfigFactory.parseString("pekko.http.server.preview.enable-http2 = on")
-      .withFallback(ConfigFactory.load());
+    Config conf =
+        ConfigFactory.parseString("pekko.http.server.preview.enable-http2 = on")
+            .withFallback(ConfigFactory.load());
     ActorSystem<Void> system = ActorSystem.create(Behaviors.empty(), "GreeterServer", conf);
     new GreeterServer(system).run();
   }
@@ -48,31 +49,30 @@ public class GreeterServer {
   public CompletionStage<ServerBinding> run() throws Exception {
 
     Function<HttpRequest, CompletionStage<HttpResponse>> service =
-        GreeterServiceHandlerFactory.create(
-            new GreeterServiceImpl(system),
-            system);
+        GreeterServiceHandlerFactory.create(new GreeterServiceImpl(system), system);
 
     CompletionStage<ServerBinding> bound =
-            Http.get(system)
-                    .newServerAt("127.0.0.1", 8080)
-                    .enableHttps(serverHttpContext())
-                    .bind(service);
+        Http.get(system)
+            .newServerAt("127.0.0.1", 8080)
+            .enableHttps(serverHttpContext())
+            .bind(service);
 
-    bound.thenAccept(binding ->
-        System.out.println("gRPC server bound to: " + binding.localAddress())
-    );
+    bound.thenAccept(
+        binding -> System.out.println("gRPC server bound to: " + binding.localAddress()));
 
     return bound;
   }
+
   // #server
 
-
-  // FIXME this will be replaced by a more convenient utility, see https://github.com/apache/pekko-grpc/issues/89
+  // FIXME this will be replaced by a more convenient utility, see
+  // https://github.com/apache/pekko-grpc/issues/89
   private static HttpsConnectionContext serverHttpContext() throws Exception {
-    String keyEncoded = read(GreeterServer.class.getResourceAsStream("/certs/server1.key"))
-        .replace("-----BEGIN PRIVATE KEY-----\n", "")
-        .replace("-----END PRIVATE KEY-----\n", "")
-        .replace("\n", "");
+    String keyEncoded =
+        read(GreeterServer.class.getResourceAsStream("/certs/server1.key"))
+            .replace("-----BEGIN PRIVATE KEY-----\n", "")
+            .replace("-----END PRIVATE KEY-----\n", "")
+            .replace("\n", "");
 
     byte[] decodedKey = Base64.getDecoder().decode(keyEncoded);
 
@@ -87,7 +87,7 @@ public class GreeterServer {
 
     KeyStore ks = KeyStore.getInstance("PKCS12");
     ks.load(null);
-    ks.setKeyEntry("private", privateKey, new char[0], new Certificate[]{ cer });
+    ks.setKeyEntry("private", privateKey, new char[0], new Certificate[] {cer});
 
     KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
     keyManagerFactory.init(ks, null);
@@ -110,6 +110,6 @@ public class GreeterServer {
 
     return new String(baos.toByteArray(), "UTF-8");
   }
-  //#server
+  // #server
 }
-//#server
+// #server

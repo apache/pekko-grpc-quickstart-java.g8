@@ -24,17 +24,16 @@ import static org.junit.Assert.assertEquals;
 public class GreeterTest {
 
   // important to enable HTTP/2 in server ActorSystem's config
-  private static final Config config = ConfigFactory
-          .parseString("pekko.http.server.preview.enable-http2 = on")
+  private static final Config config =
+      ConfigFactory.parseString("pekko.http.server.preview.enable-http2 = on")
           .withFallback(ConfigFactory.defaultApplication());
 
-  @ClassRule
-  public static final TestKitJunitResource testKit = new TestKitJunitResource(config);
+  @ClassRule public static final TestKitJunitResource testKit = new TestKitJunitResource(config);
 
   private static ActorSystem<?> serverSystem = testKit.system();
   private static ActorSystem<?> clientSystem;
   private static GreeterServiceClient client;
-  
+
   @BeforeClass
   public static void setup() throws Exception {
     CompletionStage<ServerBinding> bound = new GreeterServer(serverSystem).run();
@@ -43,10 +42,9 @@ public class GreeterTest {
 
     clientSystem = ActorSystem.create(Behaviors.empty(), "GreeterClient");
     // the host and TLS certificate config are picked up from the config file
-    client = GreeterServiceClient.create(
-        GrpcClientSettings.fromConfig("helloworld.GreeterService", clientSystem),
-        clientSystem
-      );
+    client =
+        GreeterServiceClient.create(
+            GrpcClientSettings.fromConfig("helloworld.GreeterService", clientSystem), clientSystem);
   }
 
   @AfterClass
@@ -57,12 +55,13 @@ public class GreeterTest {
 
   @Test
   public void greeterServiceRepliesToSingleRequest() throws Exception {
-    HelloReply reply = client.sayHello(HelloRequest.newBuilder().setName("Alice").build())
-        .toCompletableFuture()
-        .get(5, TimeUnit.SECONDS);
+    HelloReply reply =
+        client
+            .sayHello(HelloRequest.newBuilder().setName("Alice").build())
+            .toCompletableFuture()
+            .get(5, TimeUnit.SECONDS);
     HelloReply expected = HelloReply.newBuilder().setMessage("Hello, Alice").build();
     assertEquals(expected, reply);
   }
-
 }
 // #full-example

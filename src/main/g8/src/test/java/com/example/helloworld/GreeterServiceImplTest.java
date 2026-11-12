@@ -1,11 +1,9 @@
 // #full-example
 package com.example.helloworld;
 
-import org.apache.pekko.actor.testkit.typed.javadsl.ActorTestKit;
 import org.apache.pekko.actor.testkit.typed.javadsl.TestKitJunitResource;
 import org.apache.pekko.actor.typed.ActorSystem;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -16,8 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class GreeterServiceImplTest {
 
-  @ClassRule
-  public static final TestKitJunitResource testKit = new TestKitJunitResource();
+  @ClassRule public static final TestKitJunitResource testKit = new TestKitJunitResource();
 
   private static ActorSystem<?> system = testKit.system();
   private static GreeterService service;
@@ -29,12 +26,13 @@ public class GreeterServiceImplTest {
 
   @Test
   public void greeterServiceRepliesToSingleRequest() throws Exception {
-    HelloReply reply = service.sayHello(HelloRequest.newBuilder().setName("Bob").build())
-        .toCompletableFuture()
-        .get(5, TimeUnit.SECONDS);
+    HelloReply reply =
+        service
+            .sayHello(HelloRequest.newBuilder().setName("Bob").build())
+            .toCompletableFuture()
+            .get(5, TimeUnit.SECONDS);
     HelloReply expected = HelloReply.newBuilder().setMessage("Hello, Bob").build();
     assertEquals(expected, reply);
   }
-
 }
 // #full-example
